@@ -1,0 +1,6 @@
+{
+  "name": "LinguaSpark",
+  "description": "A gamified, AI-powered language learning adventure for beginners. Learn English through interactive worlds, daily challenges, and AI conversation buddies.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["Language Learning", "AI Chat", "Gamification", "Speech Recognition"]
+}

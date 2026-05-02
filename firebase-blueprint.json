@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user gamification stats and progression.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "energy": { "type": "integer", "description": "Current energy level (max 5)" },
+        "maxEnergy": { "type": "integer", "default": 5 },
+        "sparkPoints": { "type": "integer", "description": "Total XP earned" },
+        "streak": { "type": "integer", "description": "Current daily streak" },
+        "lastActive": { "type": "string", "format": "date-time" },
+        "onboardingComplete": { "type": "boolean" },
+        "learningGoal": { "type": "string", "enum": ["study", "job", "travel", "confidence"] },
+        "currentLevel": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] }
+      },
+      "required": ["uid", "energy", "sparkPoints", "streak"]
+    },
+    "Progress": {
+      "title": "World Progress",
+      "description": "Tracks completed adventures in each world.",
+      "type": "object",
+      "properties": {
+        "worldId": { "type": "string" },
+        "completedAdventures": { "type": "array" },
+        "stars": { "type": "integer" }
+      },
+      "required": ["worldId", "completedAdventures"]
+    },
+    "ChatSession": {
+      "title": "AI Conversation",
+      "description": "History of conversations with the AI Buddy.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "messages": { "type": "array" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "messages", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Primary user document"
+    },
+    "/users/{userId}/progress/{worldId}": {
+      "schema": "Progress",
+      "description": "Progress per world"
+    },
+    "/users/{userId}/chats/{chatId}": {
+      "schema": "ChatSession",
+      "description": "AI Buddy chat history"
+    }
+  }
+}
